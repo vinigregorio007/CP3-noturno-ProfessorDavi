@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário - Vinícius Gregório</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="js/scripts.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Vinícius Gregório</div>
+            <nav aria-label="Menu principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="curriculo.html">Currículo</a></li>
+                    <li><a href="formulario.html" aria-current="page">Formulário</a></li>
+                    <li><a href="multimidia.html">Multimídia</a></li>
+                    <li><a href="graficos.html">Gráficos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pagina-simples">
+        <section class="card">
+            <h1>Fale comigo</h1>
+            <p>Preencha o formulário abaixo. O que você digitar fica salvo como rascunho neste navegador, caso a página seja fechada.</p>
+
+            <div id="msg-form" class="msg-form" role="status" aria-live="polite" hidden></div>
+
+            <form id="form-contato" novalidate>
+                <fieldset>
+                    <legend>Dados pessoais</legend>
+                <div class="campo">
+                    <label for="nome">Nome completo *</label>
+                    <input type="text" id="nome" name="nome" aria-describedby="erro-nome" autocomplete="name" required>
+                    <p class="erro-campo" id="erro-nome" role="alert"></p>
+                </div>
+                <div class="campo">
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" name="email" aria-describedby="erro-email" autocomplete="email" required>
+                    <p class="erro-campo" id="erro-email" role="alert"></p>
+                </div>
+                <div class="campo">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" aria-describedby="erro-telefone" autocomplete="tel" inputmode="tel" placeholder="(11) 91234-5678">
+                    <p class="erro-campo" id="erro-telefone" role="alert"></p>
+                </div>
+                <div class="campo">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" aria-describedby="erro-cpf" inputmode="numeric" placeholder="000.000.000-00">
+                    <p class="ajuda" id="ajuda-cpf">Opcional. Se preencher, o CPF será validado.</p>
+                    <p class="erro-campo" id="erro-cpf" role="alert"></p>
+                </div>
+                <div class="campo">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" name="cep" aria-describedby="erro-cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000">
+                    <p class="erro-campo" id="erro-cep" role="alert"></p>
+                </div>
+                <div class="campo">
+                    <label for="nascimento">Data de nascimento</label>
+                    <input type="date" id="nascimento" name="nascimento" aria-describedby="erro-nascimento">
+                    <p class="erro-campo" id="erro-nascimento" role="alert"></p>
+                </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Sua mensagem</legend>
+                    <div class="campo">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" aria-describedby="erro-mensagem" required></textarea>
+                        <p class="erro-campo" id="erro-mensagem" role="alert"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="interesse">Interesse no meu perfil: <output id="saida-interesse" for="interesse">5 / 10</output></label>
+                        <input type="range" id="interesse" name="interesse" min="0" max="10" value="5">
+                    </div>
+                    <div class="campo">
+                        <label for="cor">Sua cor favorita</label>
+                        <input type="color" id="cor" name="cor" value="#354656">
+                    </div>
+                </fieldset>
+
+                <p class="status-rascunho" id="status-rascunho" aria-live="polite"></p>
+
+                <div class="acoes-form">
+                    <button type="submit">Enviar</button>
+                    <button type="reset">Limpar</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Feito por Vinícius Gregório</p>
+        <p>Mogi das Cruzes, SP — 2026</p>
+    </footer>
+
+</body>
+</html>

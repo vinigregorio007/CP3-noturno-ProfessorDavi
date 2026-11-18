@@ -1,0 +1,22 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Temporarios e logs
+*.tmp
+*.log
+*.bak
+
+# Compactados e binarios que nao devem ser versionados
+*.zip
+*.rar
+*.7z
+
+# Dependencias (caso use npm no futuro)
+node_modules/
