@@ -1,0 +1,992 @@
+/* =====================================================
+   CP2/CP3 - Interface responsiva (mobile-first) + tema escuro e formulario
+   O CSS base serve a tela pequena. As media queries com
+   min-width adicionam complexidade conforme a tela cresce.
+   Pontos de quebra: 768px (tablet/desktop) e 1024px.
+   ===================================================== */
+
+/* ---------- 1. Base (celular) ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333333;
+    background-color: #f4f6f9;
+    /* Rodape sempre no fim da tela, mesmo em paginas curtas */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+}
+
+/* ---------- 2. Cabecalho e menu (Flexbox) ---------- */
+
+header {
+    background-color: #354656;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Celular: logo em cima, menu embaixo, tudo centralizado */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+}
+
+.logo {
+    background-color: #f4f6f9;
+    color: #354656;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 8px 20px;
+    border-radius: 4px;
+}
+
+/* Itens do menu alinhados, com quebra de linha (flex-wrap) */
+header nav ul {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+header nav li {
+    margin: 0;
+}
+
+header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s, transform 0.1s;
+    display: inline-block;
+}
+
+header nav a:hover,
+header nav a[aria-current="page"] {
+    background-color: #92a4b5;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    transform: translateY(-1px);
+}
+
+header nav a:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #f1c40f;
+    outline-offset: 2px;
+}
+
+/* ---------- 3. Conteudo (Grid) ---------- */
+
+/* Pagina inicial: 1 coluna no celular */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    min-width: 0; /* evita que tabelas/midias estourem a coluna do grid */
+}
+
+.intro-card {
+    grid-column: 1 / -1;
+    text-align: left;
+}
+
+.intro-card h1 {
+    background-color: #354656;
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.subtitulo {
+    color: #666;
+    font-size: 0.95rem;
+    background-color: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ---------- 4. Tipografia e elementos ---------- */
+
+h2 {
+    font-size: 1.15rem;
+    color: #354656;
+    margin-bottom: 16px;
+    background-color: #e2e8f0;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+h3 {
+    font-size: 1.05rem;
+    color: #354656;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+p,
+li {
+    margin-bottom: 12px;
+    color: #4a5568;
+}
+
+ul,
+ol {
+    margin-left: 20px;
+}
+
+a {
+    color: #354656;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tabelas: rolam na horizontal dentro do proprio card, sem quebrar a pagina */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.9rem;
+}
+
+th,
+td {
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid #e2e8f0;
+}
+
+th {
+    background-color: #7b8d9c;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* ---------- 5. Cartoes de projetos (Flexbox) ---------- */
+
+.projetos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Cada cartao ocupa no minimo 240px; cabem 2 lado a lado quando ha espaco */
+.projeto-item {
+    flex: 1 1 240px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.projeto-item h3 {
+    margin-top: 0;
+}
+
+.projeto-item > :last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- 6. Formulario ---------- */
+
+.pagina-simples {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+fieldset {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 20px;
+    background-color: #f8fafc;
+    min-width: 0;
+}
+
+legend {
+    font-weight: bold;
+    color: #354656;
+    background-color: #ffffff;
+    padding: 4px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #354656;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 100%;
+    font-family: inherit;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 1rem; /* 16px evita zoom automatico do iOS ao focar */
+    background-color: #ffffff;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #7b8d9c;
+    box-shadow: 0 0 0 3px rgba(123, 141, 156, 0.2);
+}
+
+button[type="submit"] {
+    background-color: #354656;
+    color: #ffffff;
+    border: none;
+    padding: 14px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #263340;
+}
+
+/* ---------- 7. Multimidia ---------- */
+
+video,
+audio,
+.iframe-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+video {
+    height: auto;
+}
+
+/* Iframe 16:9 que acompanha a largura do card */
+.iframe-responsive {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.iframe-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ---------- 8. Graficos (Flexbox) ---------- */
+
+.graficos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.grafico-item {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+.grafico-item h3 {
+    margin-top: 0;
+}
+
+canvas {
+    display: block;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.forma-retangulo {
+    fill: #3498db;
+    stroke: #2c3e50;
+    stroke-width: 2;
+}
+
+.forma-circulo {
+    fill: #2ecc71;
+    stroke: #27ae60;
+    stroke-width: 2;
+}
+
+.forma-poligono {
+    fill: #e74c3c;
+    stroke: #c0392b;
+    stroke-width: 2;
+}
+
+/* ---------- 9. Contato e foto (Flexbox) ---------- */
+
+.perfil-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.perfil-container p {
+    margin-bottom: 0;
+    flex: 1 1 200px;
+}
+
+.foto-perfil {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 4px solid #e2e8f0;
+}
+
+/* ---------- 10. Pagina de curriculo (Grid) ---------- */
+
+/* Celular: tudo em 1 coluna, na ordem do HTML */
+.curriculo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+}
+
+/* Atalhos internos da pagina (Flexbox com quebra) */
+.atalhos {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.atalhos li {
+    margin: 0;
+}
+
+.atalhos a {
+    display: inline-block;
+    background-color: #e2e8f0;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+}
+
+/* ---------- 11. Rodape ---------- */
+
+footer {
+    background-color: #354656;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 16px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    border-top: 4px solid #263340;
+}
+
+footer p {
+    color: #cbd5e1;
+    margin-bottom: 5px;
+}
+
+/* =====================================================
+   MEDIA QUERIES (mobile-first: sempre min-width)
+   ===================================================== */
+
+/* ---------- Tablet e desktop: a partir de 768px ---------- */
+@media (min-width: 768px) {
+
+    /* Cabecalho fixo no topo; logo a esquerda, menu a direita */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    header nav ul {
+        justify-content: flex-end;
+    }
+
+    /* Ancoras nao ficam escondidas atras do cabecalho fixo */
+    [id] {
+        scroll-margin-top: 110px;
+    }
+
+    /* Pagina inicial: 2 colunas */
+    .container {
+        padding: 20px;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Cards que ocupam a largura toda (tabela e projetos) */
+    #tecnologias,
+    #projetos {
+        grid-column: 1 / -1;
+    }
+
+    .card {
+        padding: 24px;
+    }
+
+    .intro-card h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitulo {
+        display: inline-block;
+        width: 80%;
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    th,
+    td {
+        padding: 12px 15px;
+    }
+
+    table {
+        font-size: 1rem;
+    }
+
+    fieldset {
+        padding: 20px;
+    }
+
+    .pagina-simples {
+        padding: 30px 20px;
+    }
+
+    /* Curriculo: 2 colunas (lateral estreita + principal larga) */
+    .curriculo {
+        padding: 20px;
+        gap: 20px;
+        grid-template-columns: 1fr 2fr;
+        align-items: start;
+    }
+
+    .curriculo .intro-card {
+        grid-row: 1;
+    }
+
+    .coluna-lateral {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .coluna-principal {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .coluna {
+        gap: 20px;
+    }
+
+    footer {
+        margin-top: 40px;
+        padding: 25px 20px;
+    }
+}
+
+/* ---------- Desktop largo: a partir de 1024px ---------- */
+@media (min-width: 1024px) {
+
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .curriculo {
+        gap: 24px;
+        grid-template-columns: 1fr 2.2fr;
+    }
+
+    .nav-container {
+        padding: 15px 30px;
+    }
+
+    header nav ul {
+        gap: 0.75rem;
+    }
+}
+
+/* Respeita quem prefere menos animacao */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition: none !important;
+    }
+}
+
+/* =====================================================
+   CP3 - Interatividade (JavaScript + localStorage)
+   ===================================================== */
+
+/* ---------- Botao de tema (inserido no menu pelo JS) ---------- */
+.btn-tema {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #92a4b5;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-tema:hover {
+    background-color: #92a4b5;
+}
+
+/* ---------- Barra de boas-vindas ---------- */
+.barra-boasvindas {
+    background-color: #e2e8f0;
+    color: #354656;
+    padding: 8px 1rem;
+    font-size: 0.95rem;
+}
+
+.barra-boasvindas .barra-conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+}
+
+.barra-boasvindas p,
+.barra-boasvindas label {
+    margin: 0;
+    color: inherit;
+    font-weight: 600;
+}
+
+.barra-boasvindas input[type="text"] {
+    width: auto;
+    flex: 1 1 180px;
+    max-width: 260px;
+    padding: 6px 10px;
+}
+
+.barra-boasvindas button {
+    background-color: #354656;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 14px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.barra-boasvindas button.secundario {
+    background-color: transparent;
+    color: #354656;
+    border: 1px solid #354656;
+}
+
+/* ---------- Formulario: validacao e feedback ---------- */
+.campo {
+    margin-bottom: 4px;
+}
+
+.erro-campo {
+    color: #b91c1c;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 4px 0 0;
+    min-height: 0;
+}
+
+input.invalido,
+textarea.invalido {
+    border-color: #b91c1c;
+    background-color: #fef2f2;
+}
+
+input.valido,
+textarea.valido {
+    border-color: #15803d;
+}
+
+.ajuda {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 4px 0 0;
+}
+
+.msg-form {
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.msg-form[hidden] {
+    display: none;
+}
+
+.msg-sucesso {
+    background-color: #dcfce7;
+    color: #14532d;
+    border: 1px solid #86efac;
+}
+
+.msg-erro {
+    background-color: #fee2e2;
+    color: #7f1d1d;
+    border: 1px solid #fca5a5;
+}
+
+.status-rascunho {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 8px 0 16px;
+}
+
+.acoes-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.acoes-form button {
+    font-family: inherit;
+}
+
+button[type="reset"] {
+    background-color: transparent;
+    color: #354656;
+    border: 2px solid #354656;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type="color"] {
+    width: 64px;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+/* ---------- Links de navegacao da home ---------- */
+.lista-paginas {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.lista-paginas li {
+    margin: 0;
+}
+
+.lista-paginas a {
+    display: inline-block;
+    background-color: #e2e8f0;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+}
+
+/* ---------- Tema escuro ---------- */
+:root[data-tema="dark"] body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+
+:root[data-tema="dark"] header,
+:root[data-tema="dark"] footer {
+    background-color: #1e293b;
+}
+
+:root[data-tema="dark"] footer {
+    border-top-color: #0f172a;
+}
+
+:root[data-tema="dark"] .logo {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+
+:root[data-tema="dark"] .card,
+:root[data-tema="dark"] .projeto-item,
+:root[data-tema="dark"] fieldset {
+    background-color: #1e293b;
+    border-color: #334155;
+    box-shadow: none;
+}
+
+:root[data-tema="dark"] h2,
+:root[data-tema="dark"] .subtitulo,
+:root[data-tema="dark"] .atalhos a,
+:root[data-tema="dark"] .lista-paginas a {
+    background-color: #334155;
+    color: #f1f5f9;
+}
+
+:root[data-tema="dark"] .intro-card h1 {
+    background-color: #334155;
+}
+
+:root[data-tema="dark"] h3,
+:root[data-tema="dark"] label,
+:root[data-tema="dark"] a {
+    color: #93c5fd;
+}
+
+:root[data-tema="dark"] header nav a {
+    color: #ffffff;
+}
+
+:root[data-tema="dark"] header nav a:hover,
+:root[data-tema="dark"] header nav a[aria-current="page"] {
+    background-color: #475569;
+}
+
+:root[data-tema="dark"] p,
+:root[data-tema="dark"] li,
+:root[data-tema="dark"] td {
+    color: #cbd5e1;
+}
+
+:root[data-tema="dark"] th {
+    background-color: #475569;
+}
+
+:root[data-tema="dark"] th,
+:root[data-tema="dark"] td {
+    border-color: #334155;
+}
+
+:root[data-tema="dark"] tbody tr:nth-child(even) {
+    background-color: #162032;
+}
+
+:root[data-tema="dark"] legend {
+    background-color: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+}
+
+:root[data-tema="dark"] input[type="text"],
+:root[data-tema="dark"] input[type="email"],
+:root[data-tema="dark"] input[type="tel"],
+:root[data-tema="dark"] input[type="date"],
+:root[data-tema="dark"] textarea {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    border-color: #475569;
+}
+
+:root[data-tema="dark"] input.invalido,
+:root[data-tema="dark"] textarea.invalido {
+    border-color: #f87171;
+    background-color: #2a1215;
+}
+
+:root[data-tema="dark"] input.valido,
+:root[data-tema="dark"] textarea.valido {
+    border-color: #4ade80;
+}
+
+:root[data-tema="dark"] .erro-campo {
+    color: #fca5a5;
+}
+
+:root[data-tema="dark"] .ajuda,
+:root[data-tema="dark"] .status-rascunho {
+    color: #94a3b8;
+}
+
+:root[data-tema="dark"] .barra-boasvindas {
+    background-color: #1e293b;
+    color: #e2e8f0;
+}
+
+:root[data-tema="dark"] .barra-boasvindas button {
+    background-color: #475569;
+}
+
+:root[data-tema="dark"] .barra-boasvindas button.secundario {
+    background-color: transparent;
+    color: #e2e8f0;
+    border-color: #94a3b8;
+}
+
+:root[data-tema="dark"] button[type="submit"] {
+    background-color: #2563eb;
+}
+
+:root[data-tema="dark"] button[type="submit"]:hover {
+    background-color: #1d4ed8;
+}
+
+:root[data-tema="dark"] button[type="reset"] {
+    color: #e2e8f0;
+    border-color: #94a3b8;
+}
+
+:root[data-tema="dark"] .msg-sucesso {
+    background-color: #052e16;
+    color: #bbf7d0;
+    border-color: #166534;
+}
+
+:root[data-tema="dark"] .msg-erro {
+    background-color: #450a0a;
+    color: #fecaca;
+    border-color: #991b1b;
+}
+
+:root[data-tema="dark"] .foto-perfil {
+    border-color: #334155;
+}
+
+:root[data-tema="dark"] video,
+:root[data-tema="dark"] .iframe-responsive {
+    border-color: #334155;
+}
+
+@media (min-width: 768px) {
+    .acoes-form {
+        flex-wrap: nowrap;
+    }
+
+    .barra-boasvindas {
+        padding: 8px 20px;
+    }
+}
